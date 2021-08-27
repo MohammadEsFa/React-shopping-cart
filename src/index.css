@@ -1,9 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
+
 body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-size: 62.5%;
+  font-family: 'Montserrat',Arial, Helvetica, sans-serif;
 }
+/* navbar  */
 .navbar{
   background-color: rgba(0, 0, 0, .6) !important;
   padding: .5rem;
@@ -22,7 +26,90 @@ a:hover{
   padding: .5rem;
   cursor: pointer;
 }
+/* end navbar  */
 
+.content {
+  display: flex;
+  flex-wrap: wrap;
+}
+.main {
+  flex : 3 60rem;
+}
+.sidebar {
+  flex : 1 20rem;
+}
+
+
+
+
+/* products */
+.products {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+.products li {
+  flex : 0 1 29rem;
+  height: 34rem;
+  padding: 1rem;
+  margin: 1rem;
+}
+.product a .title {
+  text-decoration: none;
+  margin-top: .5rem;
+}
+.product{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-radius: 10px;
+  height: 100%;
+  transition: .6s all;
+}
+.product:hover{
+  box-shadow: 1px 1px 5px ;
+}
+.product img {
+  width: 100%;
+  max-width:30rem;
+  max-height:24rem;
+  transition: .6s all;
+  object-fit:fill;
+}
+.product img:hover{
+  opacity: .6;
+}
+.products-price {
+  width: 90%;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.products-price button {
+  text-align: center;
+}
+.products-price p {
+  font-size: 1.8rem;
+}
+.products-price p span{
+  color: grey;
+}
+.title {
+  font-size: 1rem;
+  margin: .5rem;
+}
+
+
+
+
+
+
+/* footer  */
 footer{
   background-color: rgb(68, 58, 58);
   font-size: 1.1rem;
