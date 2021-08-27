@@ -1,0 +1,34 @@
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-size: 62.5%;
+}
+.navbar{
+  background-color: rgba(0, 0, 0, .6) !important;
+  padding: .5rem;
+}
+a{
+  transition: .6s all !important;
+}
+a:hover{
+  color: black !important;
+}
+.admin{
+  margin-left: auto;
+  text-decoration: none;
+  font-size: 1.2rem;
+  color: #ffff;
+  padding: .5rem;
+  cursor: pointer;
+}
+
+footer{
+  background-color: rgb(68, 58, 58);
+  font-size: 1.1rem;
+  color: aliceblue;
+  text-align: center;
+  padding: .5rem;
+}
+
+
