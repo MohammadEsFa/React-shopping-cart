@@ -1,5 +1,6 @@
 //feature 1
 import React , {Component} from 'react';
+import Cart from './components/Cart';
 
 import Filter from './components/Filter';
 import Products from './components/Products';
@@ -11,6 +12,7 @@ class App extends Component {
     super()
     this.state = {
       products : data.products,
+      cartItems:[],
       size : "",
       sort : ""
     }
@@ -38,9 +40,33 @@ class App extends Component {
     :
     this.setState({size:event.target.value , products : data.products.filter(product => product.availableSizes.indexOf(event.target.value) >= 0)})
   }
+
+  handleAddtoCart = (product) => {
+    const cartItems = [...this.state.cartItems]
+    let already = false
+    cartItems.map(item => {
+      if(item._id === product._id){
+        item.count++ 
+        already = true}
+    });
+    if(!already){
+      cartItems.push({...product , count:1})
+    }
+    this.setState({cartItems})
+  }
+
+  handleRemove = (id) => {
+    const cartItems = [...this.state.cartItems]
+    const filtered = cartItems.filter(cart => cart._id !== id )
+    this.setState({
+      cartItems : filtered
+    })
+  }
  
 
   render() {
+
+    const {products , cartItems , size , sort} = this.state
 
     return (
       <div className="App">
@@ -52,15 +78,21 @@ class App extends Component {
             <div className='content'>
               <div className='main'>
                 <Filter 
-                count={this.state.products.length}
-                size={this.state.size}
-                sort={this.state.sort}
+                count={products.length}
+                size={size}
+                sort={sort}
                 handlesort={this.handleSort}
                 handlesize={this.handleSize}
                 />
-                <Products products={this.state.products}/>
+                <Products 
+                products={products} 
+                handleAdd={this.handleAddtoCart}
+                />
               </div>
-              <div className='sidebar'>Cart Items </div>
+              <div className='sidebar'><Cart 
+              cartItems={cartItems}
+              handleRemove={this.handleRemove}
+              /> </div>
             </div>
           </main>
           <footer>All Rights Reserved</footer>

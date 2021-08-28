@@ -41,6 +41,7 @@ a:hover{
 
 
 /* filter  */
+
 .filter {
   display: flex;
   justify-content: space-around;
@@ -52,7 +53,6 @@ a:hover{
   flex : 1;
   font-size: .9rem;
 }
-
 
 /* end filter  */
 
@@ -95,6 +95,8 @@ a:hover{
   max-height:24rem;
   transition: .6s all;
   object-fit:fill;
+  border-top-left-radius:10px;
+  border-top-right-radius:10px;
 }
 .product img:hover{
   opacity: .6;
@@ -123,6 +125,52 @@ a:hover{
 /* end products  */
 
 
+
+/* cart  */
+.cart{
+  margin-right: 1rem;
+}
+.cart-header{
+  margin: 1rem;
+  padding: 1rem;
+  font-size: .9rem;
+  border-bottom: .2rem solid rgb(230, 221, 221);
+}
+.cart-items li{
+  width: 100%;
+  list-style: none;
+  margin-bottom: 1.5rem;
+} 
+.cart-items div {
+  display: flex;
+  margin: .5rem;
+  justify-content: space-between;
+} 
+.cart-items img {
+  width:3.5rem;
+  height: 4rem;
+  border-radius: 5px;
+  transition: .6s all;
+} 
+.cart-items img:hover{
+  width:6rem;
+  height: 7rem;
+} 
+
+.total {
+  width: 87%;
+  margin: auto;
+}
+.total-cart{
+  display: flex;
+  justify-content: space-between;
+}
+.total-cart:first-child{
+ margin-left: 1.2rem;
+ font-size: 1.2rem;
+}
+
+/* end cart  */
 
 
 /* footer  */
