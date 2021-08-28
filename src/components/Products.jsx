@@ -2,12 +2,12 @@ import React,{Component} from 'react';
 import { formatcurrency } from '../utils/price';
 
 class Products extends Component {
-    // state = {  }
     render() { 
+        const {products , handleAdd} = this.props
         return (
             <div>
                 <ul className='products'>
-                  {this.props.products.map(product =>(
+                  {products.map(product =>(
                       <li key={product._id}>
                         <div className='product'>
                             <a href={"#"+product._id}>
@@ -16,7 +16,10 @@ class Products extends Component {
                                 <p className='title'>{product.title}</p>
                             <div className='products-price'>
                                 <p>{formatcurrency(product.price)}</p>
-                                <button className='btn btn-outline-dark'>Add to Cart</button>
+                                <button 
+                                className='btn btn-outline-dark'
+                                onClick={() => handleAdd(product)}
+                                >Add to Cart</button>
                             </div>  
                         </div>
                       </li>
