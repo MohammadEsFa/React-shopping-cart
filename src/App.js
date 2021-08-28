@@ -8,14 +8,11 @@ import data from './data.json'
 
 class App extends Component {
 
-  constructor () {
-    super()
-    this.state = {
-      products : data.products,
-      cartItems:[],
-      size : "",
-      sort : ""
-    }
+  state = {
+    products : data.products,
+    cartItems: localStorage.getItem('cartItems') ? JSON.parse(localStorage.getItem('cartItems')) :[],
+    size : "",
+    sort : ""
   }
 
   handleSort = (event) => {
@@ -53,6 +50,7 @@ class App extends Component {
       cartItems.push({...product , count:1})
     }
     this.setState({cartItems})
+    localStorage.setItem('cartItems',JSON.stringify(cartItems))
   }
 
   handleRemove = (id) => {
@@ -61,8 +59,12 @@ class App extends Component {
     this.setState({
       cartItems : filtered
     })
+    localStorage.setItem('cartItems',JSON.stringify(filtered))
   }
  
+  handleOrder = (order) => {
+    alert(`${order.fullname} Your order is done`)
+  }
 
   render() {
 
@@ -89,9 +91,11 @@ class App extends Component {
                 handleAdd={this.handleAddtoCart}
                 />
               </div>
-              <div className='sidebar'><Cart 
+              <div className='sidebar'>
+              <Cart 
               cartItems={cartItems}
               handleRemove={this.handleRemove}
+              handleOrder={this.handleOrder}
               /> </div>
             </div>
           </main>
