@@ -40,6 +40,22 @@ a:hover{
 }
 
 
+/* filter  */
+.filter {
+  display: flex;
+  justify-content: space-around;
+  margin: 1rem;
+  padding: 1rem;
+  border-bottom: .2rem solid rgb(230, 221, 221);
+}
+.filter div {
+  flex : 1;
+  font-size: .9rem;
+}
+
+
+/* end filter  */
+
 
 
 /* products */
@@ -104,7 +120,7 @@ a:hover{
   margin: .5rem;
 }
 
-
+/* end products  */
 
 
 
