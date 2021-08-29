@@ -198,6 +198,30 @@ a:hover{
 
 /* end form  */
 
+/* modal  */
+
+.modal-details{
+  display: flex;
+  justify-content: space-around;
+  padding: .5rem;
+}
+.modal-details .btn-secondary{
+  margin: .5rem;
+}
+.modal-details div{
+  margin: 1rem;
+  padding: .4rem;
+  font-size: 1rem;
+}
+.modal-details img{
+  height: 30rem;
+}
+.modal-price{
+  display: flex;
+  justify-content: space-between;
+}
+/* end modal  */
+
 /* footer  */
 footer{
   background-color: rgb(68, 58, 58);
