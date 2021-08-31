@@ -222,13 +222,46 @@ a:hover{
 }
 /* end modal  */
 
+
+/* cart modal  */
+.cart-modal{
+  text-align: center;
+  width: 40%;
+  margin: auto;
+}
+.cart-modal ul {
+  text-align: center;
+  width: 90%;
+  margin: auto;
+  margin-bottom: 3rem;
+}
+.cart-modal h3{
+  color: rgb(31, 128, 31);
+  margin-bottom: 3rem;
+}
+.cart-modal h4{
+  margin-bottom: 2rem;
+}
+.cart-modal li{
+  display: flex;
+  justify-content: space-between;
+  list-style: none;
+  margin-bottom: .8rem;
+  justify-content: baseline;
+}
+.cart-modal p{
+  font-size:.9rem ;
+}
+
+/* end cart modal  */
+
 /* footer  */
-footer{
+/* footer{
   background-color: rgb(68, 58, 58);
   font-size: 1.1rem;
   color: aliceblue;
   text-align: center;
   padding: .5rem;
-}
+} */
 
 

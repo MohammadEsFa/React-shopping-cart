@@ -2,6 +2,9 @@ import React,{Component} from 'react';
 
 import { formatcurrency } from '../utils/price';
 import Fade from 'react-reveal/Fade'
+import Modal from 'react-modal'
+import { Zoom } from 'react-reveal';
+const shortid = require('shortid');
 
 class Cart extends Component {
 
@@ -9,7 +12,8 @@ class Cart extends Component {
         showForm : false,
         fullname : '',
         email:'',
-        address:''
+        address:'',
+        item : null
     }
     
     handleShow = () => {
@@ -24,17 +28,29 @@ class Cart extends Component {
         e.preventDefault();
         const {fullname,email,address} = this.state
         const order = {
+            id:shortid.generate(),
             fullname,
             email,
             address,
             cartItems : this.props.cartItems
         }
-        this.props.handleOrder(order)
+        this.setState({item:order})
+    }
+
+    handleCloseCartModal = () => {
+        this.setState({item:null})
     }
 
     render() { 
         const {cartItems , handleRemove} = this.props
-        const {showForm }=this.state
+        const {showForm , item }=this.state
+        
+        let today = new Date();
+        let date = `${today.getUTCMonth()}-${today.getUTCDay()}-${today.getUTCFullYear()}`
+        let time = `${today.getHours()}:${today.getMinutes()}`
+
+        // let date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+       
         return ( 
         <div>
             <div 
@@ -78,7 +94,7 @@ class Cart extends Component {
                         {showForm ? 
                         <Fade right cacade>
                         <div className='form-cart'>
-                           <form onSubmit={this.handleSubmit}>
+                           <form onSubmit={(e)=>this.handleSubmit(e)}>
                                <ul className="form-container">
                                    <li>
                                        <label>Email</label>
@@ -113,6 +129,48 @@ class Cart extends Component {
                                </ul>
                            </form>
                         </div></Fade> :null}
+                        {item ? 
+                            <Modal
+                            isOpen={true} 
+                            onRequestClose={this.handleCloseModal}>
+                                <Zoom>
+                                    <div className='cart-modal'>
+                                    <h3>Your Order Has Been Placed</h3>
+                                    <h4>Order: {item.id}</h4>
+                                    <ul>
+                                        <li>
+                                            <h6>FullName:</h6>
+                                            <p>{item.fullname}</p>
+                                        </li>
+                                        <li>
+                                            <h6>Email:</h6>
+                                            <p>{item.email}</p>
+                                        </li>
+                                        <li>
+                                            <h6>Date:</h6>
+                                            <p>{`${time} ${date}`}</p>
+                                        </li>
+                                        <li>
+                                            <h6>Total:</h6>
+                                            <p>
+                                            {formatcurrency(cartItems.reduce((a,c) => a + (c.price * c.count),0))}
+                                            </p>
+                                        </li>
+                                        <li>
+                                            <h6>Items:</h6>
+                                            <div style={{textAlign:'right'}}>
+                                                {item.cartItems.map(i => (
+                                                    <p key={i._id}>{`${i.count}x ${i.title}`}</p>
+                                                ))}
+                                            </div>
+                                        </li>
+                                    </ul>
+                                    <button 
+                                    className='btn btn-danger btn-sm'
+                                    onClick={this.handleCloseCartModal}>Close</button>
+                                 </div>
+                                </Zoom>
+                            </Modal> : null}
                     </div>
             </div>
         </div> 

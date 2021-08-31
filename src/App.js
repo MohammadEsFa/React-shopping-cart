@@ -62,9 +62,9 @@ class App extends Component {
     localStorage.setItem('cartItems',JSON.stringify(filtered))
   }
  
-  handleOrder = (order) => {
-    alert(`${order.fullname} Your order is done`)
-  }
+  // handleOrder = (order) => {
+  //   alert(`${order.fullname} Your order is done`)
+  // }
 
   render() {
 
@@ -99,7 +99,7 @@ class App extends Component {
               /> </div>
             </div>
           </main>
-          <footer>All Rights Reserved</footer>
+          {/* <footer>All Rights Reserved</footer> */}
       </div>
     );
   }
