@@ -8,12 +8,14 @@ import data from './data.json'
 
 class App extends Component {
 
+
   state = {
     products : data.products,
     cartItems: localStorage.getItem('cartItems') ? JSON.parse(localStorage.getItem('cartItems')) :[],
     size : "",
     sort : ""
   }
+
 
   handleSort = (event) => {
     const sort = event.target.value
@@ -61,11 +63,8 @@ class App extends Component {
     })
     localStorage.setItem('cartItems',JSON.stringify(filtered))
   }
- 
-  // handleOrder = (order) => {
-  //   alert(`${order.fullname} Your order is done`)
-  // }
 
+ 
   render() {
 
     const {products , cartItems , size , sort} = this.state
@@ -99,7 +98,6 @@ class App extends Component {
               /> </div>
             </div>
           </main>
-          {/* <footer>All Rights Reserved</footer> */}
       </div>
     );
   }

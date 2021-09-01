@@ -4,6 +4,7 @@ import { formatcurrency } from '../utils/price';
 import Fade from 'react-reveal/Fade'
 import Modal from 'react-modal'
 import { Zoom } from 'react-reveal';
+import axios from 'axios';
 const shortid = require('shortid');
 
 class Cart extends Component {
@@ -24,7 +25,7 @@ class Cart extends Component {
         this.setState({[e.target.name] : e.target.value})
     }
     
-    handleSubmit = (e) => {
+    handleSubmit = async (e) => {
         e.preventDefault();
         const {fullname,email,address} = this.state
         const order = {
@@ -35,11 +36,27 @@ class Cart extends Component {
             cartItems : this.props.cartItems
         }
         this.setState({item:order})
+        await axios({
+            method:'POST',
+            url:'http://localhost:5000/users',
+            data : {
+                id:order.id,
+                fullname,
+                email,
+                cartItems : this.props.cartItems
+            }
+        })
+        localStorage.clear();
     }
 
     handleCloseCartModal = () => {
         this.setState({item:null})
     }
+
+    handleRefreshPage =() => {
+        window.location.reload(false);
+      }
+    
 
     render() { 
         const {cartItems , handleRemove} = this.props
@@ -49,8 +66,7 @@ class Cart extends Component {
         let date = `${today.getUTCMonth()}-${today.getUTCDay()}-${today.getUTCFullYear()}`
         let time = `${today.getHours()}:${today.getMinutes()}`
 
-        // let date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-       
+    
         return ( 
         <div>
             <div 
@@ -167,7 +183,8 @@ class Cart extends Component {
                                     </ul>
                                     <button 
                                     className='btn btn-danger btn-sm'
-                                    onClick={this.handleCloseCartModal}>Close</button>
+                                    onClick={() => { this.handleCloseCartModal(); this.handleRefreshPage();}}>
+                                    Close</button>
                                  </div>
                                 </Zoom>
                             </Modal> : null}
