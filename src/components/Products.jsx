@@ -1,26 +1,23 @@
-import React,{Component} from 'react';
+import React, { useState } from 'react';
 
 import { formatcurrency } from '../utils/price';
 import {Fade, Zoom} from 'react-reveal'
 import Modal from 'react-modal'
 
-class Products extends Component {
 
-    state={
-        item : null
+const Products = ({products , handleAdd}) => {
+
+  
+    const [item , setItem] = useState(null)
+
+    const handleOpenModal = (item) => {
+        setItem(item)
     }
 
-    handleOpenModal = (item) => {
-        this.setState({item})
+    const handleCloseModal = () => {
+        setItem(null)
     }
-
-    handleCloseModal = () => {
-        this.setState({item:null})
-    }
-
-    render() { 
-        const {products , handleAdd} = this.props
-        const {item}=this.state
+    
         return (
             <div>
                 <Fade bottom cascade>
@@ -28,7 +25,9 @@ class Products extends Component {
                   {products.map(product =>(
                       <li key={product._id}>
                         <div className='product'>
-                            <a href={"#"+product._id} onClick={() =>this.handleOpenModal(product)}>
+                            <a href={"#"+product._id}
+                            onClick={() => handleOpenModal(product)}
+                            >
                                 <img src={product.image} alt={product.title} />
                             </a>
                                 <p className='title'>{product.title}</p>
@@ -47,7 +46,7 @@ class Products extends Component {
                 {item ? 
                 <Modal 
                 isOpen={true} 
-                onRequestClose={this.handleCloseModal}>
+                onRequestClose={handleCloseModal}>
                     <Zoom>
                         <div className='modal-container'>
                            <div className='modal-details'>
@@ -68,14 +67,14 @@ class Products extends Component {
                                         className='btn btn-outline-dark'
                                         onClick={() => {
                                             handleAdd(item)
-                                            this.handleCloseModal();
+                                            handleCloseModal();
                                         }}
                                         >
                                         Add to cart
                                         </button>
                                         <button 
                                         className='btn btn-danger btn-sm'
-                                        onClick={this.handleCloseModal}
+                                        onClick={handleCloseModal}
                                         >close
                                         </button>
                                     </div>
@@ -87,6 +86,5 @@ class Products extends Component {
             </div>
           );
     }
-}
  
 export default Products;

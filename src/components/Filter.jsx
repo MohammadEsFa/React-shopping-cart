@@ -1,15 +1,14 @@
-import React,{Component} from 'react';
+import React from 'react';
 
-class Filter extends Component {
-    state = {  }
-    render() { 
+const Filter = ({count , size , sort , handlesort , handlesize}) => {
+    
         return ( 
             <div className='filter'>
-                <div className='filter-result'> {this.props.count} Products</div>
+                <div className='filter-result'> {count} Products</div>
                 <div className='filter-sort'>Order:{' '}
                     <select 
-                    value={this.props.sort} 
-                    onChange={this.props.handlesort}
+                    value={sort} 
+                    onChange={handlesort}
                     >
                         <option>Latest</option>
                         <option value='Highest'>Highest</option>
@@ -18,8 +17,8 @@ class Filter extends Component {
                 </div>
                 <div className='filter-size'>Size:{' '}
                 <select
-                value={this.props.size} 
-                onChange={this.props.handlesize}
+                value={size} 
+                onChange={handlesize}
                 >
                     <option value=''>All</option>
                     <option value='XS'>XS</option>
@@ -33,6 +32,5 @@ class Filter extends Component {
             </div>
          );
     }
-}
  
 export default Filter;

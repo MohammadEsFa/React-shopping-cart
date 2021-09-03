@@ -1,4 +1,4 @@
-import React,{Component} from 'react';
+import React, { useState } from 'react';
 
 import { formatcurrency } from '../utils/price';
 import Fade from 'react-reveal/Fade'
@@ -7,64 +7,50 @@ import { Zoom } from 'react-reveal';
 import axios from 'axios';
 const shortid = require('shortid');
 
-class Cart extends Component {
+const Cart = ({cartItems , handleRemove}) => {
 
-    state = {
-        showForm : false,
-        fullname : '',
-        email:'',
-        address:'',
-        item : null
-    }
+    const [showForm , setShowForm] = useState(false)
+    const [fullName , setFullName] = useState('')
+    const [email , setEmail] = useState('')
+    const [address , setAddress] = useState('')
+    const [item , setItem] = useState(null)
     
-    handleShow = () => {
-        this.setState({showForm:true})
+    const handleShow = () => {
+        setShowForm(true)
     }
 
-    handleInput = (e) => {
-        this.setState({[e.target.name] : e.target.value})
-    }
     
-    handleSubmit = async (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        const {fullname,email,address} = this.state
         const order = {
             id:shortid.generate(),
-            fullname,
+            fullName,
             email,
             address,
-            cartItems : this.props.cartItems
+            cartItems
         }
-        this.setState({item:order})
+        setItem(order)
         await axios({
             method:'POST',
             url:'http://localhost:5000/users',
             data : {
                 id:order.id,
-                fullname,
+                fullName,
                 email,
-                cartItems : this.props.cartItems
+                cartItems
             }
         })
         localStorage.clear();
     }
 
-    handleCloseCartModal = () => {
-        this.setState({item:null})
-    }
-
-    handleRefreshPage =() => {
+    const handleRefreshPage =() => {
         window.location.reload(false);
       }
     
-
-    render() { 
-        const {cartItems , handleRemove} = this.props
-        const {showForm , item }=this.state
         
-        let today = new Date();
-        let date = `${today.getUTCMonth()}-${today.getUTCDay()}-${today.getUTCFullYear()}`
-        let time = `${today.getHours()}:${today.getMinutes()}`
+    let today = new Date();
+    let date = `${today.getUTCMonth()}-${today.getUTCDay()}-${today.getUTCFullYear()}`
+    let time = `${today.getHours()}:${today.getMinutes()}`
 
     
         return ( 
@@ -103,37 +89,34 @@ class Cart extends Component {
                                     {formatcurrency(cartItems.reduce((a,c) => a + (c.price * c.count),0))}
                             </div>
                             <button 
-                            onClick={this.handleShow}
+                            onClick={handleShow}
                             className='btn btn-primary btn-sm'>Proceed</button>
                             </div>
                         </div> : null }
                         {showForm ? 
                         <Fade right cacade>
                         <div className='form-cart'>
-                           <form onSubmit={(e)=>this.handleSubmit(e)}>
+                           <form onSubmit={(e)=>handleSubmit(e)}>
                                <ul className="form-container">
                                    <li>
                                        <label>Email</label>
                                        <input 
-                                       name='email'
-                                       type="email"
-                                       onChange={this.handleInput}
+                                       value={email}
+                                       onChange={(e) => setEmail(e.target.value)}
                                        required />
                                    </li>
                                    <li>
                                        <label>FullName</label>
                                        <input
-                                       name='fullname'
-                                       type="text"
-                                       onChange={this.handleInput}
+                                       value={fullName}
+                                       onChange={(e) => setFullName(e.target.value)}
                                        required />
                                    </li>
                                    <li>
                                        <label>Address</label>
                                        <input 
-                                       name='address'
-                                       type="text"
-                                       onChange={this.handleInput}
+                                       value={address}
+                                       onChange={(e) => setAddress(e.target.value)}
                                        required />
                                    </li>
                                    <li>
@@ -148,7 +131,7 @@ class Cart extends Component {
                         {item ? 
                             <Modal
                             isOpen={true} 
-                            onRequestClose={this.handleCloseModal}>
+                            onRequestClose={setItem}>
                                 <Zoom>
                                     <div className='cart-modal'>
                                     <h3>Your Order Has Been Placed</h3>
@@ -183,7 +166,7 @@ class Cart extends Component {
                                     </ul>
                                     <button 
                                     className='btn btn-danger btn-sm'
-                                    onClick={() => { this.handleCloseCartModal(); this.handleRefreshPage();}}>
+                                    onClick={() => { setItem(null); handleRefreshPage();}}>
                                     Close</button>
                                  </div>
                                 </Zoom>
@@ -193,6 +176,5 @@ class Cart extends Component {
         </div> 
         );
     }
-}
  
 export default Cart;
