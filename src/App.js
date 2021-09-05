@@ -19,7 +19,7 @@ const App = () => {
 
   const handleSort = (event) => {
     const sort = event.target.value
-    const myproducts = [...data.products]
+    const myproducts = [...products]
       setSort(sort)
       setProducts(
           myproducts.sort((a,b)=>(
