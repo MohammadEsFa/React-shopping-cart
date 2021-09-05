@@ -40,7 +40,7 @@ const Cart = ({cartItems , handleRemove}) => {
                 cartItems
             }
         })
-        localStorage.clear();
+        
     }
 
     const handleRefreshPage =() => {
@@ -166,7 +166,7 @@ const Cart = ({cartItems , handleRemove}) => {
                                     </ul>
                                     <button 
                                     className='btn btn-danger btn-sm'
-                                    onClick={() => { setItem(null); handleRefreshPage();}}>
+                                    onClick={() => { setItem(null); handleRefreshPage();localStorage.clear();}}>
                                     Close</button>
                                  </div>
                                 </Zoom>

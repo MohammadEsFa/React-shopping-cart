@@ -256,12 +256,15 @@ a:hover{
 /* end cart modal  */
 
 /* footer  */
-/* footer{
-  background-color: rgb(68, 58, 58);
-  font-size: 1.1rem;
-  color: aliceblue;
+.footer {
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 1.8rem;
+  background-color: rgb(149, 143, 143);
+  color: rgb(255, 255, 255);
+  font-size: 1rem;
   text-align: center;
-  padding: .5rem;
-} */
+}
 
 

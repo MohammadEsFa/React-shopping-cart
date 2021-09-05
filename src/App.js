@@ -4,7 +4,7 @@ import Cart from './components/Cart';
 import Filter from './components/Filter';
 import Products from './components/Products';
 import data from './data.json'
-
+import LayOut from './layOut/MainLayOut';
 
 
 const App = () => {
@@ -69,10 +69,7 @@ const App = () => {
 
     return (
       <div className="App">
-          <nav className="navbar  navbar-dark bg-dark">
-            <a className="navbar-brand" href="#">SHOPPING-CART</a>
-            <a className='admin'>Admin</a>
-          </nav>
+        <LayOut>
           <main>
             <div className='content'>
               <div className='main'>
@@ -95,6 +92,7 @@ const App = () => {
               /> </div>
             </div>
           </main>
+        </LayOut>
       </div>
     );
   }
