@@ -5,7 +5,6 @@ const LayOut = ({children}) => {
         <div>
           <nav className="navbar  navbar-dark bg-dark">
             <a className="navbar-brand" href="#">SHOPPING-CART</a>
-            <a className='admin'>Admin</a>
           </nav>
           {children}
           <div class="footer">
